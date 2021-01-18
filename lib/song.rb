@@ -1,20 +1,7 @@
 class Song
     @@count = 0
     @@genres = []
-    @@genre_count = {}
     @@artists = []
-    @@artist_counter = {}
-
-    attr_accessor :name, :artist, :genre
-
-    def initialize(name, artist, genre)
-        @name = name
-        @artist = artist
-        @genre = genre
-        @@count += 1
-        @@genres << genre
-        @@artists << artist
-    end
 
     def self.count
         @@count
@@ -38,5 +25,18 @@ class Song
         counter = Hash.new(0)
         @@artists.each { |artist| counter[artist] += 1 }
         counter
+    end
+
+    attr_accessor :name, :artist, :genre
+
+    def initialize(name, artist, genre)
+        @name, @artist, @genre = name, artist, genre
+        save
+    end
+
+    def save
+        @@count += 1
+        @@genres << @genre
+        @@artists << @artist
     end
 end
